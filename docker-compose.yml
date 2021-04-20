@@ -1,0 +1,71 @@
+version: '3'
+services:
+  carl_mysql:
+    image: mysql:5.7
+    container_name: carl_mysql
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: carl
+    ports:
+      - 127.0.0.1:$CARL_MYSQL_PORT:3306
+
+  #################### Base  ####################
+
+  base: &base
+    image: darthjee/carl
+    volumes:
+      - ./source:/home/app/app
+    links:
+      - carl_mysql:mysql
+    env_file: .env
+
+
+  base_build:
+    <<: *base
+    build:
+      context: .
+      dockerfile: Dockerfile.carl
+    command: echo done
+
+  production_base_build:
+    image: darthjee/production_carl
+    env_file: .env
+    environment:
+      RAILS_ENV: production
+    build:
+      context: .
+      dockerfile: Dockerfile.production_carl
+    links:
+      - carl_mysql:mysql
+    command: echo done
+  #################### CONTAINERS ####################
+
+  carl_app:
+    <<: *base
+    container_name: carl_app
+    command: /bin/bash bin/server.sh
+    depends_on: [base_build]
+    ports:
+      - 127.0.0.1:3000:3000
+    environment:
+      - RAILS_ENV=development
+      - CARL_MYSQL_PORT=3306
+
+  carl_tests:
+    <<: *base
+    container_name: carl_tests
+    command: /bin/bash bin/tests.sh
+    depends_on: [base_build]
+    environment:
+      - RAILS_ENV=test
+
+  carl_root:
+    <<: *base
+    user: root
+    container_name: carl_root
+    command: /bin/bash
+    depends_on: [base_build]
+  carl_production:
+    env_file: .env.production
+    container_name: carl_production
+    image: $PRODUCTION_IMAGE
