@@ -24,18 +24,18 @@ jobs:
     docker:
       - image: darthjee/circleci_carl-base:0.0.1
         environment:
-          TAA_MYSQL_HOST: mysql
-          TAA_MYSQL_PORT: 3306
-          TAA_MYSQL_USER: taa
-          TAA_MYSQL_NAME: taa
-          TAA_MYSQL_PASSWORD: taa
-          TAA_PASSWORD_SALT: abcd
+          CARL_MYSQL_HOST: mysql
+          CARL_MYSQL_PORT: 3306
+          CARL_MYSQL_USER: carl
+          CARL_MYSQL_NAME: carl
+          CARL_MYSQL_PASSWORD: carl
+          CARL_PASSWORD_SALT: abcd
       - image: circleci/mysql:5.7
         name: mysql
         environment:
-          MYSQL_DATABASE: taa_test
-          MYSQL_USER: taa
-          MYSQL_PASSWORD: taa
+          MYSQL_DATABASE: carl_test
+          MYSQL_USER: carl
+          MYSQL_PASSWORD: carl
     steps:
       - checkout
       - run:
@@ -67,18 +67,18 @@ jobs:
     docker:
       - image: darthjee/circleci_carl-base:0.0.1
         environment:
-          TAA_MYSQL_HOST: mysql
-          TAA_MYSQL_PORT: 3306
-          TAA_MYSQL_USER: taa
-          TAA_MYSQL_NAME: taa
-          TAA_MYSQL_PASSWORD: taa
-          TAA_PASSWORD_SALT: abcd
+          CARL_MYSQL_HOST: mysql
+          CARL_MYSQL_PORT: 3306
+          CARL_MYSQL_USER: carl
+          CARL_MYSQL_NAME: carl
+          CARL_MYSQL_PASSWORD: carl
+          CARL_PASSWORD_SALT: abcd
       - image: circleci/mysql:5.7
         name: mysql
         environment:
-          MYSQL_DATABASE: taa_test
-          MYSQL_USER: taa
-          MYSQL_PASSWORD: taa
+          MYSQL_DATABASE: carl_test
+          MYSQL_USER: carl
+          MYSQL_PASSWORD: carl
     steps:
       - checkout
       - run:
