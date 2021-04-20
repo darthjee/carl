@@ -44,6 +44,8 @@ gem 'sinclair',     '~> 1.6.7'
 gem 'tarquinn',     '~> 0.2.0'
 gem 'turbolinks',   '5.2.1'
 
+gem 'telegram-bot-ruby', '0.15.0'
+
 gem 'darthjee-core_ext', '>= 2.0.0'
 gem 'magicka', '~> 0.5.5'
 
