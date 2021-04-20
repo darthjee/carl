@@ -2,6 +2,8 @@
 
 require 'spec_helper'
 
-describe "mocked spec" do
+# rubocop:disable RSpec/DescribeClass
+describe 'mocked spec' do
   it { expect(true).to be_truthy }
 end
+# rubocop:enable RSpec/DescribeClass
